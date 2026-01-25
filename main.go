@@ -61,6 +61,16 @@ func main() {
 			json.NewEncoder(w).Encode(produkBaru)
 		}
 	})
+	// Endpoint Root (localhost:8080)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			// Pastikan hanya menangkap path "/" tepat
+			if r.URL.Path != "/" {
+					http.NotFound(w, r)
+					return
+			}
+			w.Header().Set("Content-Type", "text/html") // Kita kirim HTML biar cakep
+			fmt.Fprint(w, "<h1>Selamat Datang di API Kasir!</h1><p><code>Arif Zein</code></p>")
+	})
 
 	// localhost:8080/health
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
