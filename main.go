@@ -24,10 +24,10 @@ var produk = []Produk{
 }
 
 func main() {
-	// GET localhost:8080/api/produk/{id}
-	// PUT localhost:8080/api/produk/{id}
-	// DELETE localhost:8080/api/produk/{id}
-	http.HandleFunc("/api/produk/", func(w http.ResponseWriter, r *http.Request) {
+	// GET localhost:8080/api/categories/{id}
+	// PUT localhost:8080/api/categories/{id}
+	// DELETE localhost:8080/api/categories/{id}
+	http.HandleFunc("/api/categories/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			getProdukByID(w, r)
 		} else if r.Method == "PUT" {
@@ -37,9 +37,9 @@ func main() {
 		}
 	})
 
-	// GET localhost:8080/api/produk
-	// POST localhost:8080/api/produk
-	http.HandleFunc("/api/produk", func(w http.ResponseWriter, r *http.Request) {
+	// GET localhost:8080/api/categories
+	// POST localhost:8080/api/categories
+	http.HandleFunc("/api/categories", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(produk)
@@ -92,8 +92,8 @@ func main() {
 
 func getProdukByID(w http.ResponseWriter, r *http.Request) {
 	// Parse ID dari URL path
-	// URL: /api/produk/123 -> ID = 123
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
+	// URL: /api/categories/123 -> ID = 123
+	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Invalid Produk ID", http.StatusBadRequest)
@@ -114,10 +114,10 @@ func getProdukByID(w http.ResponseWriter, r *http.Request) {
 }
 
 
-// PUT localhost:8080/api/produk/{id}
+// PUT localhost:8080/api/categories/{id}
 func updateProduk(w http.ResponseWriter, r *http.Request) {
 	// get id dari request
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
 
 	// ganti int
 	id, err := strconv.Atoi(idStr)
@@ -151,9 +151,9 @@ func updateProduk(w http.ResponseWriter, r *http.Request) {
 
 
 
-// DELETE localhost:8080/api/produk/{id}
+// DELETE localhost:8080/api/categories/{id}
 func deleteProduk(w http.ResponseWriter, r *http.Request) {
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
