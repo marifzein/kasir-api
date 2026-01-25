@@ -139,17 +139,7 @@ func updateProduk(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Produk belum ada", http.StatusNotFound)
 }
 
-func produkByIDHandler(w http.ResponseWriter, r *http.Request) {
-    if r.Method == http.MethodGet {
-        getProdukByID(w, r)
-        return
-    }
-    if r.Method == http.MethodPut {
-        updateProduk(w, r)
-        return
-    }
-    http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-}
+
 
 // DELETE localhost:8080/api/produk/{id}
 func deleteProduk(w http.ResponseWriter, r *http.Request) {
