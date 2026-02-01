@@ -72,4 +72,10 @@ func main() {
 	addr := "0.0.0.0:" + port
 	fmt.Println("Server running di", addr)
 
+	// Tambahkan baris ini untuk menjaga server tetap hidup
+	err = http.ListenAndServe(addr, nil) 
+	if err != nil {
+		log.Fatal("Gagal menjalankan server:", err)
+	}
+
 }
