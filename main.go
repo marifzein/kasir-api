@@ -57,11 +57,19 @@ func main() {
 
 	// 5. Jalankan Server
 	// --- Jalankan Server Sesuai Petunjuk Course ---
-	addr := "0.0.0.0:" + config.Port
+	// addr := "0.0.0.0:" + config.Port
+	// fmt.Println("Server running di", addr)
+
+	// err = http.ListenAndServe(addr, nil)
+	// if err != nil {
+	// 	fmt.Println("gagal running server", err)
+	// }
+
+	port := config.Port
+	if port == "" {
+			port = "8080" // Default jika .env tidak terbaca
+	}
+	addr := "0.0.0.0:" + port
 	fmt.Println("Server running di", addr)
 
-	err = http.ListenAndServe(addr, nil)
-	if err != nil {
-		fmt.Println("gagal running server", err)
-	}
 }
