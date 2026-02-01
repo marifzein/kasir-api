@@ -129,7 +129,7 @@ func (h *ProductHandler) Delete(w http.ResponseWriter, r *http.Request) {
 
 	err = h.service.Delete(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Gagal menghapus : "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
