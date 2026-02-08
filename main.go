@@ -51,9 +51,25 @@ func main() {
 	productService := services.NewProductService(productRepo)
 	productHandler := handlers.NewProductHandler(productService)
 
+	// Transaction
+	transactionRepo := repositories.NewTransactionRepository(db)
+	transactionService := services.NewTransactionService(transactionRepo)
+	transactionHandler := handlers.NewTransactionHandler(transactionService)
+
+	// Report
+	reportRepo := repositories.NewReportRepository(db)
+	reportService := services.NewReportService(reportRepo)
+	reportHandler := handlers.NewReportHandler(reportService)
+
+
 	// 4. Setup routes
-	http.HandleFunc("/api/produk", productHandler.HandleProducts)
-	http.HandleFunc("/api/produk/", productHandler.HandleProductByID)
+	http.HandleFunc("/api/products", productHandler.HandleProducts)
+	http.HandleFunc("/api/products/", productHandler.HandleProductByID)
+	http.HandleFunc("/api/checkout", transactionHandler.HandleCheckout) // POST
+	// Report
+	http.HandleFunc("/api/report/hari-ini", reportHandler.HandleDailyReport)
+	// Report Range (optional challenge)
+	http.HandleFunc("/api/report", reportHandler.HandleReportRange)
 
 	// 5. Jalankan Server
 	// --- Jalankan Server Sesuai Petunjuk Course ---
